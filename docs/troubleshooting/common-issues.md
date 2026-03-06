@@ -659,40 +659,38 @@ Module not found: Can't resolve '@patternfly/chatbot/dist/dynamic/Chatbot'
 
 2. **Use virtualization for large datasets**:
    ```jsx
-   import { useVirtual } from 'react-virtual';
-   import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
+      const VirtualizedTable = ({ data }) => {
+      const parentRef = useRef(null);
 
-   const VirtualizedTable = ({ data }) => {
-     const parentRef = useRef();
-     const rowVirtualizer = useVirtual({
-       size: data.length,
-       parentRef,
-       estimateSize: useCallback(() => 50, []),
-     });
+      const rowVirtualizer = useVirtualizer({
+         count: data.length,
+         getScrollElement: () => parentRef.current,
+         estimateSize: useCallback(() => 50, []),
+      });
 
-     return (
-       <div ref={parentRef} style={{ height: '400px', overflow: 'auto' }}>
-         <Table>
-           <Thead>
-             <Tr>
-               <Th>Name</Th>
-               <Th>Email</Th>
-             </Tr>
-           </Thead>
-           <Tbody>
-             {rowVirtualizer.virtualItems.map(virtualRow => {
-               const item = data[virtualRow.index];
-               return (
-                 <Tr key={virtualRow.index}>
-                   <Td>{item.name}</Td>
-                   <Td>{item.email}</Td>
-                 </Tr>
-               );
-             })}
-           </Tbody>
-         </Table>
-       </div>
-     );
+      return (
+         <div ref={parentRef} style={{ height: '400px', overflow: 'auto' }}>
+            <Table>
+               <Thead>
+                  <Tr>
+                     <Th>Name</Th>
+                     <Th>Email</Th>
+                  </Tr>
+               </Thead>
+               <Tbody>
+                  {rowVirtualizer.getVirtualItems().map(virtualRow => {
+                     const item = data[virtualRow.index];
+                     return (
+                        <Tr key={virtualRow.index}>
+                           <Td>{item.name}</Td>
+                           <Td>{item.email}</Td>
+                        </Tr>
+                     );
+                  })}
+               </Tbody>
+            </Table>
+         </div>
+      );
    };
    ```
 
