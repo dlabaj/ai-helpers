@@ -165,8 +165,8 @@ useEffect(() => {
 ```jsx
 // ✅ Required state handling
 if (isLoading) return <Spinner />;
-if (error) return <EmptyState><EmptyStateHeader titleText="Chart error" /></EmptyState>;
-if (!data?.length) return <EmptyState><EmptyStateHeader titleText="No data" /></EmptyState>;
+if (error) return <EmptyState titleText="Chart error" />;
+if (!data?.length) return <EmptyState titleText="No data" />;
 
 const processedData = useMemo(() => {
   return rawData.map(item => ({ x: item.date, y: item.value }));
@@ -180,14 +180,16 @@ const processedData = useMemo(() => {
 
 ```jsx
 // ✅ Required integration pattern
-import { Card, CardTitle, CardBody } from '@patternfly/react-core';
+import { Card, CardTitle, CardBody, PageSection } from '@patternfly/react-core';
 
-<Card>
-  <CardTitle>Chart Title</CardTitle>
-  <CardBody>
-    <ChartDonut data={data} />
-  </CardBody>
-</Card>
+<PageSection>
+  <Card>
+    <CardTitle>Chart Title</CardTitle>
+    <CardBody>
+        <ChartDonut data={data} />
+    </CardBody>
+  </Card>
+</PageSection>
 ```
 
 ## Performance Rules

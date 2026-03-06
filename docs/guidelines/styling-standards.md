@@ -107,9 +107,9 @@ Use utility classes only when:
 // ✅ Acceptable utility usage - when component props aren't sufficient
 <Card className="pf-v6-u-h-100"> {/* Force card to full height */}
   <CardBody>
-    <Text className="pf-v6-u-text-align-center"> {/* Center text when component doesn't provide prop */}
+    <Content className="pf-v6-u-text-align-center"> {/* Center text when component doesn't provide prop */}
       Centered content
-    </Text>
+    </Content>
   </CardBody>
 </Card>
 ```
@@ -124,11 +124,11 @@ Use utility classes only when:
 .custom-component {
   /* ✅ Correct - Use semantic tokens */
   color: var(--pf-t--global--text--color--regular);
-  margin: var(--pf-t-global--spacer--md);
+  margin: var(--pf-t--global--spacer--md);
   
   /* ❌ Wrong - Hardcoded values or base tokens */
   /* color: #333333; */
-  /* color: var`--pf-t--global--text--color--100); */
+  /* color: var(--pf-t--global--text--color--100); */
   /* margin: 16px; */
 }
 ```
@@ -141,7 +141,7 @@ Use utility classes only when:
 --pf-t--global--background--color--primary--default
 
 /* Spacing */
---pf-t-global--spacer--{xs|sm|md|lg|xl}
+--pf-t--global--spacer--{xs|sm|md|lg|xl}
 
 /* Typography */
 --pf-t--global--font--family--body	
@@ -329,12 +329,18 @@ import { Title, Content } from '@patternfly/react-core';
 
 ## Spacing and Inline Styles
 
-- ✅ **Always use PatternFly spacing variables (design tokens) for all spacing, including in inline style props.**
-- ❌ **Do not use hardcoded numbers for margin, padding, or other spacing in inline styles.**
+### Priority Order for Spacing and Layout
+1. **Component composition first** - Use proper PatternFly component hierarchy
+2. **Component props second** - Use built-in props for spacing/layout
+3. **Utility classes third** - Use PatternFly utility classes when props aren't available
+4. **Inline styles with tokens last** - Only when no other option exists
 
-**Correct:**
+### When You Must Use Inline Styles
+If component composition, props, and utility classes don't provide what you need, use design tokens (not hardcoded values):
+
+**Correct (if no other option exists):**
 ```jsx
-<div style={{ marginBottom: 'var(--pf-t--global--spacer-lg)' }} />
+<div style={{ marginBottom: 'var(--pf-t--global--spacer--lg)' }} />
 ```
 
 **Incorrect:**
@@ -342,19 +348,17 @@ import { Title, Content } from '@patternfly/react-core';
 <div style={{ marginBottom: 24 }} />
 ```
 
-## Utility Classes vs Inline Styles
-
-- ✅ **Prefer using PatternFly utility classes for spacing, alignment, and layout instead of inline styles.**
-- ❌ **Only use inline styles if a PatternFly utility class does not exist for the required spacing or layout.**
+### Prefer Utility Classes Over Inline Styles
+When component composition and props aren't sufficient, use utility classes instead of inline styles:
 
 **Correct:**
 ```jsx
 <div className="pf-v6-u-mb-lg" />
 ```
 
-**Incorrect:**
+**Less preferred (but acceptable if utility class doesn't exist):**
 ```jsx
-<div style={{ marginBottom: 'var(--pf-t--global--spacer-lg)' }} />
+<div style={{ marginBottom: 'var(--pf-t--global--spacer--lg)' }} />
 ```
 
 ## External Link Buttons

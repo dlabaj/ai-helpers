@@ -27,12 +27,11 @@ PatternFly development can present various challenges ranging from setup issues 
 1. **Use correct v6 components**:
    ```jsx
    // ✅ Correct v6 components
-   import { Content, EmptyState, EmptyStateBody, EmptyStateHeader } from '@patternfly/react-core';
+   import { Content, EmptyState } from '@patternfly/react-core';
    
    <Content component="h1">Title</Content>
    
-   <EmptyState>
-     <EmptyStateHeader titleText="No data" />
+   <EmptyState titleText="No data">
      <EmptyStateBody>Description goes here</EmptyStateBody>
    </EmptyState>
    ```
@@ -156,9 +155,9 @@ Module not found: Can't resolve '@patternfly/react-charts'
    ```jsx
    // ✅ Correct - Use design tokens
    const chartColors = [
-     'var(--pf-t-chart-color-blue-300)',
-     'var(--pf-t-chart-color-green-300)',
-     'var(--pf-t-chart-color-orange-300)'
+     'var(--pf-t--chart--color--blue--300)',
+     'var(--pf-t--chart--color--green--300)',
+     'var(--pf-t--chart--color--orange--300)'
    ];
    <ChartDonut colorScale={chartColors} />
    ```
@@ -658,14 +657,41 @@ Module not found: Can't resolve '@patternfly/chatbot/dist/dynamic/Chatbot'
    const paginatedData = data.slice((page - 1) * perPage, page * perPage);
    ```
 
-2. **Use virtualization**:
+2. **Use virtualization for large datasets**:
    ```jsx
-   import { DndProvider, useDrag, useDrop } from 'react-dnd';
-   import { HTML5Backend } from 'react-dnd-html5-backend';
-   import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
+      const VirtualizedTable = ({ data }) => {
+      const parentRef = useRef(null);
 
-   const DraggableRow = ({ id, text, index, moveRow }) => {
-   // ... existing code ...
+      const rowVirtualizer = useVirtualizer({
+         count: data.length,
+         getScrollElement: () => parentRef.current,
+         estimateSize: useCallback(() => 50, []),
+      });
+
+      return (
+         <div ref={parentRef} style={{ height: '400px', overflow: 'auto' }}>
+            <Table>
+               <Thead>
+                  <Tr>
+                     <Th>Name</Th>
+                     <Th>Email</Th>
+                  </Tr>
+               </Thead>
+               <Tbody>
+                  {rowVirtualizer.getVirtualItems().map(virtualRow => {
+                     const item = data[virtualRow.index];
+                     return (
+                        <Tr key={virtualRow.index}>
+                           <Td>{item.name}</Td>
+                           <Td>{item.email}</Td>
+                        </Tr>
+                     );
+                  })}
+               </Tbody>
+            </Table>
+         </div>
+      );
+   };
    ```
 
 3. **Optimize re-renders**:

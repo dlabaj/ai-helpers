@@ -108,11 +108,9 @@ const createMessage = (content, role) => ({
 ```jsx
 // ✅ Required integration pattern
 <PageSection hasBodyWrapper>
-  <div style={{ height: '600px' }}>
     <Chatbot>
       {/* Chatbot content */}
     </Chatbot>
-  </div>
 </PageSection>
 ```
 
@@ -191,5 +189,5 @@ const createMessage = (content, role) => ({
 
 ### Further Reading
 - **[PatternFly Chatbot Docs](https://www.patternfly.org/chatbot/overview/)**
-- **[Component API](https://github.com/patternfly/patternfly-react/tree/main/packages/react-core/src/components/ChipGroup)** - ChipGroup component API for tags
+- **[Message Component API](https://www.patternfly.org/patternfly-ai/chatbot/messages/react)** - Message component API documentation
 - **[Accessibility Guide](https://www.patternfly.org/get-started/accessibility-guide)**
