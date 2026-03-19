@@ -23,6 +23,11 @@
       "name": "pf-figma",
       "source": "./plugins/pf-figma",
       "description": "Figma design review, diffing, and asset identification for PatternFly"
+    },
+    {
+      "name": "pf-core",
+      "source": "./plugins/pf-core",
+      "description": "PatternFly Core (HTML/CSS) release and maintenance for patternfly/patternfly"
     }
   ]
 }
