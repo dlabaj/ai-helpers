@@ -210,6 +210,7 @@ Components indexed by the user interactions they support. Use this catalog to fi
 |-----------|----------|
 | Table (bulk select) | Select all / deselect all via header checkbox |
 | DataList (bulk select) | Bulk selection toolbar pattern |
+| Toolbar (bulk select) | Bulk selection dropdown with count |
 
 ---
 
@@ -226,4 +227,3 @@ These interactions require application state and coordinated handlers, not just 
 | Save once, show pending status, and recover from failure | Form, ActionGroup, Wizard, Button, Spinner, Alert | [Shared submission and recovery](form-wizard-behaviors.md#shared-submission-and-recovery) |
 
 The default PoC is **Details → Configuration → Review**, with a small Form and a mock asynchronous save. The four behavior sections are reusable across products; validation rules, dirty-state criteria, and recovery semantics remain explicit application policies.
-| Toolbar (bulk select) | Bulk selection dropdown with count |
