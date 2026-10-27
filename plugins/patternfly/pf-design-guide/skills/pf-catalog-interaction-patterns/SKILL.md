@@ -1,10 +1,10 @@
 ---
 name: pf-catalog-interaction-patterns
-description: Find PatternFly components and coordinated form and wizard behaviors by interaction need. Use when selecting components, defining validation and navigation, or protecting and submitting user input in prototypes.
+description: Catalog interaction patterns (click, hover, keyboard, drag) and coordinated behaviors across PatternFly components, including forms and wizards. Use when selecting a component for a specific interaction need, describing UI behavior without naming a component, looking up a component's supported interactions, building prototypes that require interaction-based component lookup, or defining workflow behaviors such as validation, navigation, unsaved-work protection, and submission/recovery.
 version: 0.1.0
 ---
 
-Find the right PatternFly component for a given interaction pattern. This skill indexes components by **how users interact with them**, complementing component-centric documentation that answers "what can this component do?" For forms and wizards, it also describes behaviors that require coordinated application state rather than a component alone.
+Find the right PatternFly component for a given interaction pattern, or look up the interactions a component supports. This skill indexes components by **how users interact with them**, complementing component-centric documentation that answers "what can this component do?" It also covers coordinated interaction patterns across components, including form and wizard workflows that require application state rather than a component alone.
 
 ## PatternFly MCP
 
